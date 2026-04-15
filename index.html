@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMEN Casa</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b0f14;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.header span {
+    color: orange;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+}
+
+/* CARD */
+.card {
+    background: #151b23;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 16px;
+}
+
+/* BUTTON */
+.main-btn {
+    margin: 20px;
+    padding: 15px;
+    width: calc(100% - 40px);
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #007aff, orange);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    LUMEN <span>Casa</span>
+</div>
+
+<div class="grid">
+
+    <div class="card" onclick="openSmartLife()">
+        <div class="icon">💡</div>
+        <div class="title">Iluminação</div>
+    </div>
+
+    <div class="card" onclick="openSmartLife()">
+        <div class="icon">🔌</div>
+        <div class="title">Tomadas</div>
+    </div>
+
+    <div class="card" onclick="openSmartLife()">
+        <div class="icon">📷</div>
+        <div class="title">Câmeras</div>
+    </div>
+
+    <div class="card" onclick="openSmartLife()">
+        <div class="icon">🏠</div>
+        <div class="title">Casa</div>
+    </div>
+
+</div>
+
+<button class="main-btn" onclick="openSmartLife()">
+    Abrir Controle Completo
+</button>
+
+<script>
+function openSmartLife(){
+    window.location.href = "smartlife://";
+
+    setTimeout(() => {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.tuya.smartlife";
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
