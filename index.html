@@ -5,13 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LUMEN Casa</title>
 
-<link rel="manifest" href="manifest.json">
-
 <style>
 body {
     margin: 0;
     font-family: Arial;
-    background: #0b0f14;
+    background: radial-gradient(circle at top, #0f1720, #05080c);
     color: white;
 }
 
@@ -21,54 +19,103 @@ body {
     text-align: center;
     font-size: 22px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .header span {
     color: orange;
 }
 
+/* ROOM */
+.room {
+    padding: 15px;
+}
+
+.room h2 {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
 /* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 15px;
+    gap: 12px;
 }
 
 /* CARD */
 .card {
-    background: #151b23;
-    border-radius: 15px;
-    padding: 20px;
+    background: linear-gradient(145deg, #121821, #0c1118);
+    border-radius: 14px;
+    padding: 18px;
     text-align: center;
     cursor: pointer;
     transition: 0.2s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 .card:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .icon {
-    font-size: 30px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 8px;
 }
 
-.title {
-    font-size: 16px;
+small {
+    opacity: 0.5;
 }
 
 /* BUTTON */
 .main-btn {
-    margin: 20px;
+    margin: 15px;
     padding: 15px;
-    width: calc(100% - 40px);
+    width: calc(100% - 30px);
     border: none;
     border-radius: 12px;
     background: linear-gradient(45deg, #007aff, orange);
     color: white;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 15px;
+}
+
+/* FLOAT */
+.fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: orange;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    text-align: center;
+    line-height: 60px;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    background: rgba(0,0,0,0.85);
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #151b23;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
 }
 </style>
 </head>
@@ -79,42 +126,116 @@ body {
     LUMEN <span>Casa</span>
 </div>
 
-<div class="grid">
-
-    <div class="card" onclick="openSmartLife()">
-        <div class="icon">💡</div>
-        <div class="title">Iluminação</div>
-    </div>
-
-    <div class="card" onclick="openSmartLife()">
-        <div class="icon">🔌</div>
-        <div class="title">Tomadas</div>
-    </div>
-
-    <div class="card" onclick="openSmartLife()">
-        <div class="icon">📷</div>
-        <div class="title">Câmeras</div>
-    </div>
-
-    <div class="card" onclick="openSmartLife()">
-        <div class="icon">🏠</div>
-        <div class="title">Casa</div>
-    </div>
-
-</div>
+<div id="app"></div>
 
 <button class="main-btn" onclick="openSmartLife()">
-    Abrir Controle Completo
+    Controle completo
 </button>
 
+<div class="fab" onclick="openModal()">+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h3>Novo dispositivo</h3>
+
+        <input id="name" placeholder="Nome">
+
+        <select id="type">
+            <option value="💡">Luz</option>
+            <option value="📷">Câmera</option>
+            <option value="🔌">Tomada</option>
+            <option value="📺">TV</option>
+        </select>
+
+        <input id="room" placeholder="Cômodo">
+
+        <button onclick="save()">Salvar</button>
+    </div>
+</div>
+
 <script>
+
+let devices = JSON.parse(localStorage.getItem("devices")) || [];
+
+function render(){
+
+    let grouped = {};
+
+    devices.forEach(d => {
+        if(!grouped[d.room]) grouped[d.room] = [];
+        grouped[d.room].push(d);
+    });
+
+    let html = "";
+
+    for(let room in grouped){
+
+        html += `<div class="room">
+                    <h2>${room}</h2>
+                    <div class="grid">`;
+
+        grouped[room].forEach(d => {
+            html += `
+                <div class="card"
+                     onclick="openSmartLife()"
+                     oncontextmenu="remove(${d.id}); return false;">
+                    <div class="icon">${d.type}</div>
+                    <strong>${d.name}</strong><br>
+                    <small>toque para controlar</small>
+                </div>
+            `;
+        });
+
+        html += `</div></div>`;
+    }
+
+    document.getElementById("app").innerHTML = html;
+}
+
+function openModal(){
+    document.getElementById("modal").style.display = "flex";
+}
+
+function save(){
+    const name = document.getElementById("name").value;
+    const room = document.getElementById("room").value;
+    const type = document.getElementById("type").value;
+
+    if(!name || !room) return;
+
+    devices.push({
+        id: Date.now(),
+        name,
+        room,
+        type
+    });
+
+    localStorage.setItem("devices", JSON.stringify(devices));
+
+    document.getElementById("modal").style.display = "none";
+
+    render();
+}
+
+function remove(id){
+    if(confirm("Remover dispositivo?")){
+        devices = devices.filter(d => d.id !== id);
+        localStorage.setItem("devices", JSON.stringify(devices));
+        render();
+    }
+}
+
 function openSmartLife(){
     window.location.href = "smartlife://";
 
     setTimeout(() => {
         window.location.href = "https://play.google.com/store/apps/details?id=com.tuya.smartlife";
-    }, 2000);
+    }, 1500);
 }
+
+render();
+
 </script>
 
 </body>
