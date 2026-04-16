@@ -71,30 +71,35 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
   </div>
 </div>
 <script>
-const shareBtn = document.getElementById('shareBtn');
-shareBtn.addEventListener('click', async () => {
+function shareCard(){
   const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
-  const text = 'Júlio César de Oliveira | LUMEN Casa
+  const text = 'Cartão de visita — Júlio César de Oliveira
+LUMEN Casa
 Técnico em automação residencial
 WhatsApp direto: ' + url;
-  try {
-    if (navigator.share) {
-      await navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text, url });
-    } else if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text + '
+  if (navigator.share) return navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text, url });
+  return Promise.reject(new Error('share unsupported'));
+}
+document.getElementById('shareBtn').addEventListener('click', async (e) => {
+  e.preventDefault();
+  try { await shareCard(); }
+  catch (_) {
+    const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
+    const text = 'Cartão de visita — Júlio César de Oliveira
+LUMEN Casa
+Técnico em automação residencial
+WhatsApp direto: ' + url;
+    try {
+      if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text + '
 ' + url);
-      window.location.href = url;
-    } else {
-      const t = document.createElement('textarea');
-      t.value = text + '
+      else {
+        const ta = document.createElement('textarea');
+        ta.value = text + '
 ' + url;
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand('copy');
-      t.remove();
-      window.location.href = url;
-    }
-  } catch (e) {
+        ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+    } catch (err) {}
     window.location.href = url;
   }
 });
