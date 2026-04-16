@@ -12,8 +12,8 @@
 body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(180deg,#fff,#f7f9ff);display:flex;justify-content:center;padding:18px;color:var(--text)}
 .wrap{width:min(760px,100%)}
 .card{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;overflow:hidden}
-.top{display:flex;justify-content:center;align-items:center;margin:4px 0 14px;min-height:150px;padding:8px 0 2px}
-.logo{width:min(380px,92vw);max-height:130px;object-fit:contain;display:block;object-position:center center}
+.top{display:flex;justify-content:center;align-items:center;margin:4px 0 14px;min-height:170px;padding:8px 0 2px}
+.logo{width:min(520px,96vw);max-height:160px;object-fit:contain;display:block;object-position:center center;transform:scale(1.15);transform-origin:center center}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
 .grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;box-shadow:0 10px 18px rgba(0,0,0,.08)}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;height:72px;border:none;border-radius:22px;color:#fff;font-weight:800;font-size:1.05rem;text-decoration:none;background:linear-gradient(135deg,var(--blue),var(--orange));box-shadow:0 18px 30px rgba(47,128,255,.2)}
@@ -31,8 +31,8 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
   .grid{gap:7px}
   .btn{height:68px;border-radius:18px;font-size:1rem}
   .wa,.share,.install{height:52px;border-radius:14px}
-  .top{min-height:135px}
-  .logo{width:min(330px,92vw);max-height:110px}
+  .top{min-height:150px}
+  .logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}
 }
 </style>
 </head>
@@ -90,4 +90,24 @@ installBtn.addEventListener('click', async () => {
   deferredPrompt = null;
   installBtn.style.display = 'none';
 });
-document.getElementById('shareBtn').addEventList
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  try {
+    const shareData = {
+      title: 'LUMEN Casa | Júlio César de Oliveira',
+      text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa',
+      url: 'https://wa.me/5564996039433'
+    };
+    if (navigator.share) await navigator.share(shareData);
+    else {
+      const ok = confirm('Seu navegador não abriu a tela de compartilhar. Quer copiar o link do cartão?');
+      if (ok) {
+        await navigator.clipboard.writeText(location.href);
+        alert('Link copiado.');
+      }
+    }
+  } catch (e) {}
+});
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
