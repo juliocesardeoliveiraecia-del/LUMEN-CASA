@@ -33,15 +33,7 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .autoimg{width:100%;aspect-ratio:1/1;border-radius:14px;display:block;box-shadow:0 10px 18px rgba(0,0,0,.08);object-fit:cover;background:#fff}
 .tile span{font-size:.75rem;line-height:1.15;text-align:center;color:#475467;font-weight:700}
 .foot{margin-top:12px;text-align:center;color:#98a2b3;font-size:.9rem;line-height:1.35}
-@media (max-width:480px){
-  .grid{gap:7px}
-  .btn{height:68px;border-radius:18px;font-size:1rem}
-  .wa,.share,.install{height:52px;border-radius:14px}
-  .top{min-height:150px}
-  .logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}
-  .showcase-grid{gap:7px}
-  .tile span{font-size:.7rem}
-}
+@media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.share,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}.showcase-grid{gap:7px}.tile span{font-size:.7rem}}
 </style>
 </head>
 <body>
@@ -79,23 +71,31 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
   </div>
 </div>
 <script>
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex'; });
-installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
-document.getElementById('shareBtn').addEventListener('click', async () => {
-  try {
-    const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
-    const msg = 'Júlio César de Oliveira | LUMEN Casa
+const shareBtn = document.getElementById('shareBtn');
+shareBtn.addEventListener('click', async () => {
+  const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
+  const text = 'Júlio César de Oliveira | LUMEN Casa
 Técnico em automação residencial
 WhatsApp direto: ' + url;
-    if (navigator.share) await navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text: msg });
-    else {
-      await navigator.clipboard.writeText(msg);
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text, url });
+    } else if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text + '
+' + url);
+      window.location.href = url;
+    } else {
+      const t = document.createElement('textarea');
+      t.value = text + '
+' + url;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      t.remove();
       window.location.href = url;
     }
   } catch (e) {
-    window.location.href = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
+    window.location.href = url;
   }
 });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
