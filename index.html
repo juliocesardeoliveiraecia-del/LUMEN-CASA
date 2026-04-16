@@ -21,10 +21,8 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .section{text-align:center;padding:18px 6px 0}
 .title{font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#475467}
 .name{margin-top:6px;color:var(--muted)}
-.actions{display:grid;gap:10px;margin-top:16px}
-.wa,.share,.install{height:56px;border-radius:16px;font-weight:800;border:none;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:10px;width:100%}
+.wa,.install{height:56px;border-radius:16px;font-weight:800;border:none;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:10px;width:100%}
 .wa{background:linear-gradient(135deg,#25d366,#1fb855);color:#fff}
-.share{background:#f3f7ff;color:#2b4a7f;border:1px solid rgba(47,128,255,.12)}
 .install{background:#edf3ff;color:#33558b;display:none}
 .showcase{margin-top:18px;padding-top:14px;border-top:1px solid rgba(47,128,255,.08)}
 .showcase-title{text-align:center;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#475467;font-size:.9rem;margin-bottom:10px}
@@ -33,7 +31,7 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .autoimg{width:100%;aspect-ratio:1/1;border-radius:14px;display:block;box-shadow:0 10px 18px rgba(0,0,0,.08);object-fit:cover;background:#fff}
 .tile span{font-size:.75rem;line-height:1.15;text-align:center;color:#475467;font-weight:700}
 .foot{margin-top:12px;text-align:center;color:#98a2b3;font-size:.9rem;line-height:1.35}
-@media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.share,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}.showcase-grid{gap:7px}.tile span{font-size:.7rem}}
+@media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}.showcase-grid{gap:7px}.tile span{font-size:.7rem}}
 </style>
 </head>
 <body>
@@ -55,7 +53,6 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
       <div class="name">Júlio César de Oliveira</div>
       <div class="actions">
         <a class="wa" href="https://wa.me/5564996039433" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <button class="share" id="shareBtn" type="button">Compartilhar cartão</button>
       </div>
     </div>
     <div class="showcase">
@@ -71,13 +68,6 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
   </div>
 </div>
 <script>
-document.getElementById('shareBtn').addEventListener('click', () => {
-  const msg = 'Cartão de visita — Júlio César de Oliveira | LUMEN Casa
-Técnico em automação residencial
-Entre em contato comigo no WhatsApp: https://wa.me/5564996039433';
-  const url = 'https://wa.me/?text=' + encodeURIComponent(msg);
-  window.location.href = url;
-});
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
