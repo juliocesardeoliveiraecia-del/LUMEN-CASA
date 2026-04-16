@@ -26,8 +26,19 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .wa{background:linear-gradient(135deg,#25d366,#1fb855);color:#fff}
 .share{background:#f3f7ff;color:#2b4a7f;border:1px solid rgba(47,128,255,.12)}
 .install{background:#edf3ff;color:#33558b;display:none}
+.showcase{margin-top:18px;padding-top:14px;border-top:1px solid rgba(47,128,255,.08)}
+.showcase-title{text-align:center;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#475467;font-size:.9rem;margin-bottom:10px}
+.showcase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.showcase-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;box-shadow:0 10px 18px rgba(0,0,0,.08)}
 .foot{margin-top:12px;text-align:center;color:#98a2b3;font-size:.9rem;line-height:1.35}
-@media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.share,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}}
+@media (max-width:480px){
+  .grid{gap:7px}
+  .btn{height:68px;border-radius:18px;font-size:1rem}
+  .wa,.share,.install{height:52px;border-radius:14px}
+  .top{min-height:150px}
+  .logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}
+  .showcase-grid{gap:7px}
+}
 </style>
 </head>
 <body>
@@ -36,16 +47,20 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
     <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
       <button id="installBtn" class="install">Adicionar à tela inicial</button>
     </div>
+
     <div class="top">
       <img class="logo" src="./logo.png" alt="LUMEN Casa" />
     </div>
+
     <div class="grid">
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/97325497ac1697fdcda12384ba02b901caef1000.jpg" alt="Casa inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6b817f6402f72f52791e419fe58c401f6b5b778a.jpg" alt="Interruptor inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/60e799b7c09715de6a20e9a03b9630fa3e042801.jpg" alt="Celular controlando automação" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e1e2fe4c8ddc0d1ad05b95ceb9cf0204dbc45259.jpg" alt="Câmera Wi-Fi de segurança" />
     </div>
+
     <a class="btn" href="smartlife://">Acessar painel da casa</a>
+
     <div class="section">
       <div class="title">Suporte técnico</div>
       <div class="name">Júlio César de Oliveira</div>
@@ -54,15 +69,50 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
         <button class="share" id="shareBtn" type="button">Compartilhar cartão</button>
       </div>
     </div>
+
+    <div class="showcase">
+      <div class="showcase-title">Soluções em automação</div>
+      <div class="showcase-grid">
+        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Casa com iluminação inteligente" />
+        <img src="https://images.unsplash.com/photo-1558002038-6d8f1d4cf61f?auto=format&fit=crop&w=800&q=80" alt="Fechadura digital" />
+        <img src="https://images.unsplash.com/photo-1550895030-823330fc2552?auto=format&fit=crop&w=800&q=80" alt="Câmera de segurança" />
+        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Controle por aplicativo" />
+      </div>
+    </div>
+
     <div class="foot">Compartilhe sua experiência. Indique Lumen Casa para amigos.</div>
   </div>
 </div>
+
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex'; });
-installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
-document.getElementById('shareBtn').addEventListener('click', async () => { try { const shareData = { title: 'LUMEN Casa | Júlio César de Oliveira', text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa', url: location.href }; if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(location.href); alert('Link copiado.'); } } catch (e) {} });
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'flex';
+});
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBtn.style.display = 'none';
+});
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  try {
+    const shareData = {
+      title: 'LUMEN Casa | Júlio César de Oliveira',
+      text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa',
+      url: location.href
+    };
+    if (navigator.share) await navigator.share(shareData);
+    else {
+      await navigator.clipboard.writeText(location.href);
+      alert('Link copiado.');
+    }
+  } catch (e) {}
+});
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
