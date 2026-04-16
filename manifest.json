@@ -1,37 +1,10 @@
 {
   "name": "LUMEN Casa",
   "short_name": "LUMEN Casa",
-  "description": "Automação Residencial Inteligente",
-  "start_url": "/",
+  "start_url": ".",
+  "scope": ".",
   "display": "standalone",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
-  "orientation": "portrait",
-  "scope": "/",
-  "lang": "pt-BR",
-  "categories": ["utilities", "lifestyle"],
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [],
-  "shortcuts": [
-    {
-      "name": "Abrir Smart Life",
-      "short_name": "Smart Life",
-      "description": "Abre o app Smart Life",
-      "url": "/?action=smartlife",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
-    }
-  ]
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": []
 }
