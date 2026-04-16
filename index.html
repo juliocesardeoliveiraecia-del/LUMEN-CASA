@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-" />
-" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 <title>LUMEN Casa</title>
 <style>
 :root{--blue:#2f80ff;--orange:#ff8a00;--text:#1f2937;--muted:#6b7280;--line:rgba(47,128,255,.10);--shadow:0 24px 70px rgba(15, 23, 42, .10)}
@@ -22,12 +22,11 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .title{font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#475467}
 .name{margin-top:6px;color:var(--muted)}
 .actions{display:grid;gap:10px;margin-top:16px}
-.wa,.share,.install{height:56px;border-radius:16px;font-weight:800;border:none;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:10px}
+.wa,.share,.install{height:56px;border-radius:16px;font-weight:800;border:none;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:10px;width:100%}
 .wa{background:linear-gradient(135deg,#25d366,#1fb855);color:#fff}
 .share{background:#f3f7ff;color:#2b4a7f;border:1px solid rgba(47,128,255,.12)}
-.install{background:#edf3ff;color:#33558b;display:none;width:100%}
+.install{background:#edf3ff;color:#33558b;display:none}
 .foot{margin-top:12px;text-align:center;color:#98a2b3;font-size:.9rem;line-height:1.35}
-.icon{width:22px;height:22px;flex:0 0 22px}
 @media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.share,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}}
 </style>
 </head>
@@ -37,7 +36,9 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
     <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
       <button id="installBtn" class="install">Adicionar à tela inicial</button>
     </div>
-    <div class="top"><img class="logo" src="./logo.png" alt="LUMEN Casa" /></div>
+    <div class="top">
+      <img class="logo" src="./logo.png" alt="LUMEN Casa" />
+    </div>
     <div class="grid">
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/97325497ac1697fdcda12384ba02b901caef1000.jpg" alt="Casa inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6b817f6402f72f52791e419fe58c401f6b5b778a.jpg" alt="Interruptor inteligente" />
@@ -59,9 +60,9 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => {e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex';});
-installBtn.addEventListener('click', async () => {if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none';});
-document.getElementById('shareBtn').addEventListener('click', async () => {try {const shareData = {title: 'LUMEN Casa | Júlio César de Oliveira', text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa', url: location.href}; if (navigator.share) await navigator.share(shareData); else {await navigator.clipboard.writeText(location.href); alert('Link copiado.');}} catch (e) {}});
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex'; });
+installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
+document.getElementById('shareBtn').addEventListener('click', async () => { try { const shareData = { title: 'LUMEN Casa | Júlio César de Oliveira', text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa', url: location.href }; if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(location.href); alert('Link copiado.'); } } catch (e) {} });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
