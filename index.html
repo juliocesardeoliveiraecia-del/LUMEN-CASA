@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<link rel="manifest" href="manifest.json" />
+" />
 <title>LUMEN Casa</title>
 <style>
 :root{--blue:#2f80ff;--orange:#ff8a00;--green:#25d366;--text:#1f2937;--muted:#6b7280;--line:rgba(47,128,255,.10);--shadow:0 24px 70px rgba(15, 23, 42, .10)}
@@ -12,8 +12,8 @@
 body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(180deg,#fff,#f7f9ff);display:flex;justify-content:center;padding:18px;color:var(--text)}
 .wrap{width:min(760px,100%)}
 .card{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;overflow:hidden}
-.top{display:flex;justify-content:center;align-items:center;margin:4px 0 14px;min-height:132px;padding:8px 0 2px}
-.logo{width:min(360px,88vw);max-height:110px;display:block}
+.top{display:flex;justify-content:center;align-items:center;margin:4px 0 14px;min-height:140px;padding:8px 0 2px}
+.logo{width:min(360px,88vw);max-height:120px;object-fit:contain;display:block;object-position:center center}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
 .grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;display:block;box-shadow:0 10px 18px rgba(0,0,0,.08)}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;height:72px;border:none;border-radius:22px;color:#fff;font-weight:800;font-size:1.05rem;text-decoration:none;background:linear-gradient(135deg,var(--blue),var(--orange));box-shadow:0 18px 30px rgba(47,128,255,.2)}
@@ -31,8 +31,8 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
   .grid{gap:7px}
   .btn{height:68px;border-radius:18px;font-size:1rem}
   .wa,.share,.install{height:52px;border-radius:14px}
-  .top{min-height:110px}
-  .logo{width:min(300px,90vw);max-height:92px}
+  .top{min-height:120px}
+  .logo{width:min(320px,90vw);max-height:102px}
 }
 </style>
 </head>
@@ -44,23 +44,7 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
     </div>
 
     <div class="top">
-      <svg class="logo" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LUMEN Casa">
-        <defs>
-          <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="#2f80ff"/>
-            <stop offset="100%" stop-color="#ff8a00"/>
-          </linearGradient>
-          <linearGradient id="g2" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="#0f5bd8"/>
-            <stop offset="100%" stop-color="#ff9b21"/>
-          </linearGradient>
-        </defs>
-        <rect x="30" y="30" rx="36" ry="36" width="1140" height="240" fill="#ffffff"/>
-        <text x="600" y="150" text-anchor="middle" font-size="86" font-weight="900" font-family="Arial, Helvetica, sans-serif" fill="url(#g1)">LUMEN</text>
-        <text x="600" y="218" text-anchor="middle" font-size="46" font-weight="700" font-family="Arial, Helvetica, sans-serif" fill="#4b5563">Casa</text>
-        <path d="M260 96 h55 l32 -32 h70 l32 32 h55" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M260 96 v100 h240 v-100" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img class="logo" src="logo.png" alt="LUMEN Casa" />
     </div>
 
     <div class="grid">
@@ -81,7 +65,7 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
           WhatsApp
         </a>
         <button class="share" id="shareBtn" type="button">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">ircle cx="18" cy="5" r="3"></circle>ircle cx="6" cy="12" r="3"></circle>ircle cx="18" cy="19" r="3"></circle>e x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>e x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           Compartilhar cartão
         </button>
       </div>
