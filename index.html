@@ -74,9 +74,9 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
       <div class="showcase-title">Soluções em automação</div>
       <div class="showcase-grid">
         <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Casa com iluminação inteligente" />
+        <img src="https://images.unsplash.com/photo-1514215387636-2856ea56b4a5?auto=format&fit=crop&w=800&q=80" alt="Automação residencial" />
         <img src="https://images.unsplash.com/photo-1558002038-6d8f1d4cf61f?auto=format&fit=crop&w=800&q=80" alt="Fechadura digital" />
         <img src="https://images.unsplash.com/photo-1550895030-823330fc2552?auto=format&fit=crop&w=800&q=80" alt="Câmera de segurança" />
-        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Controle por aplicativo" />
       </div>
     </div>
 
@@ -87,29 +87,19 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'flex';
-});
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  installBtn.style.display = 'none';
-});
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex'; });
+installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
 document.getElementById('shareBtn').addEventListener('click', async () => {
   try {
     const shareData = {
-      title: 'LUMEN Casa | Júlio César de Oliveira',
-      text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa',
-      url: location.href
+      title: 'LUMEN Casa',
+      text: 'Fale comigo no WhatsApp: https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa',
+      url: 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa'
     };
     if (navigator.share) await navigator.share(shareData);
     else {
-      await navigator.clipboard.writeText(location.href);
-      alert('Link copiado.');
+      await navigator.clipboard.writeText(shareData.url);
+      alert('Link do WhatsApp copiado.');
     }
   } catch (e) {}
 });
