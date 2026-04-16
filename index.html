@@ -4,7 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<link rel="manifest" href="manifest.json" />
+" />
+" />
 <title>LUMEN Casa</title>
 <style>
 :root{--blue:#2f80ff;--orange:#ff8a00;--text:#1f2937;--muted:#6b7280;--line:rgba(47,128,255,.10);--shadow:0 24px 70px rgba(15, 23, 42, .10)}
@@ -24,16 +25,10 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
 .wa,.share,.install{height:56px;border-radius:16px;font-weight:800;border:none;display:flex;align-items:center;justify-content:center;text-decoration:none;gap:10px}
 .wa{background:linear-gradient(135deg,#25d366,#1fb855);color:#fff}
 .share{background:#f3f7ff;color:#2b4a7f;border:1px solid rgba(47,128,255,.12)}
-.install{background:#edf3ff;color:#33558b;display:none}
+.install{background:#edf3ff;color:#33558b;display:none;width:100%}
 .foot{margin-top:12px;text-align:center;color:#98a2b3;font-size:.9rem;line-height:1.35}
 .icon{width:22px;height:22px;flex:0 0 22px}
-@media (max-width:480px){
-  .grid{gap:7px}
-  .btn{height:68px;border-radius:18px;font-size:1rem}
-  .wa,.share,.install{height:52px;border-radius:14px}
-  .top{min-height:150px}
-  .logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}
-}
+@media (max-width:480px){.grid{gap:7px}.btn{height:68px;border-radius:18px;font-size:1rem}.wa,.share,.install{height:52px;border-radius:14px}.top{min-height:150px}.logo{width:min(420px,96vw);max-height:135px;transform:scale(1.12)}}
 </style>
 </head>
 <body>
@@ -42,71 +37,31 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
     <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
       <button id="installBtn" class="install">Adicionar à tela inicial</button>
     </div>
-
-    <div class="top">
-      <img class="logo" src="./logo.png" alt="LUMEN Casa" />
-    </div>
-
+    <div class="top"><img class="logo" src="./logo.png" alt="LUMEN Casa" /></div>
     <div class="grid">
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/97325497ac1697fdcda12384ba02b901caef1000.jpg" alt="Casa inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6b817f6402f72f52791e419fe58c401f6b5b778a.jpg" alt="Interruptor inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/60e799b7c09715de6a20e9a03b9630fa3e042801.jpg" alt="Celular controlando automação" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e1e2fe4c8ddc0d1ad05b95ceb9cf0204dbc45259.jpg" alt="Câmera Wi-Fi de segurança" />
     </div>
-
     <a class="btn" href="smartlife://">Acessar painel da casa</a>
-
     <div class="section">
       <div class="title">Suporte técnico</div>
       <div class="name">Júlio César de Oliveira</div>
       <div class="actions">
-        <a class="wa" href="https://wa.me/5564996039433" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M11.3 9.9c-.25 0-.65.09-.99.44-.34.35-1.3 1.2-1.3 2.95 0 1.75 1.33 3.43 1.52 3.67.19.24 2.52 4.02 6.22 5.48 3.08 1.22 3.71.98 4.38.92.67-.06 2.15-.88 2.45-1.73.3-.85.3-1.58.21-1.73-.09-.15-.34-.24-.71-.42s-2.15-1.05-2.48-1.17c-.33-.12-.57-.18-.81.18-.24.35-.93 1.17-1.13 1.41-.21.24-.42.27-.78.09-.36-.18-1.51-.56-2.88-1.79-1.07-.96-1.79-2.15-2-2.5-.21-.36-.02-.55.16-.73.17-.17.36-.42.54-.62.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.95-1.11-2.67-.29-.69-.58-.6-.81-.61z"/><path fill="#fff" d="M16 3C8.82 3 3 8.63 3 15.58c0 2.49.76 4.81 2.07 6.76L4 29l6.9-1.8a13.23 13.23 0 0 0 5.1 1.01c7.18 0 13-5.63 13-12.58C29 8.63 23.18 3 16 3zm0 2.3c5.92 0 10.7 4.6 10.7 10.28 0 5.68-4.78 10.28-10.7 10.28-1.86 0-3.6-.45-5.12-1.24l-4.08 1.07 1.1-3.92A9.98 9.98 0 0 1 5.3 15.58C5.3 9.9 10.08 5.3 16 5.3z"/></svg>
-          WhatsApp
-        </a>
-        <button class="share" id="shareBtn" type="button">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-          Compartilhar cartão
-        </button>
+        <a class="wa" href="https://wa.me/5564996039433" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <button class="share" id="shareBtn" type="button">Compartilhar cartão</button>
       </div>
     </div>
-
-    <div class="foot">Comptilhe sua experiência. Indique Lumen Casa para amigos.</div>
+    <div class="foot">Compartilhe sua experiência. Indique Lumen Casa para amigos.</div>
   </div>
 </div>
-
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'flex';
-});
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  installBtn.style.display = 'none';
-});
-document.getElementById('shareBtn').addEventListener('click', async () => {
-  try {
-    const shareData = {
-      title: 'LUMEN Casa | Júlio César de Oliveira',
-      text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa',
-      url: 'https://wa.me/5564996039433'
-    };
-    if (navigator.share) await navigator.share(shareData);
-    else {
-      const ok = confirm('Seu navegador não abriu a tela de compartilhar. Quer copiar o link do cartão?');
-      if (ok) {
-        await navigator.clipboard.writeText(location.href);
-        alert('Link copiado.');
-      }
-    }
-  } catch (e) {}
-});
+window.addEventListener('beforeinstallprompt', e => {e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex';});
+installBtn.addEventListener('click', async () => {if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none';});
+document.getElementById('shareBtn').addEventListener('click', async () => {try {const shareData = {title: 'LUMEN Casa | Júlio César de Oliveira', text: 'Cartão de visitas digital de Júlio César de Oliveira - Técnico LUMEN Casa', url: location.href}; if (navigator.share) await navigator.share(shareData); else {await navigator.clipboard.writeText(location.href); alert('Link copiado.');}} catch (e) {}});
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
