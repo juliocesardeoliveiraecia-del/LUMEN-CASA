@@ -77,31 +77,29 @@ function shareCard(){
 LUMEN Casa
 Técnico em automação residencial
 WhatsApp direto: ' + url;
-  if (navigator.share) return navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text, url });
-  return Promise.reject(new Error('share unsupported'));
+  return { title: 'Júlio César de Oliveira — LUMEN Casa', text, url };
 }
 document.getElementById('shareBtn').addEventListener('click', async (e) => {
   e.preventDefault();
-  try { await shareCard(); }
-  catch (_) {
-    const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
-    const text = 'Cartão de visita — Júlio César de Oliveira
-LUMEN Casa
-Técnico em automação residencial
-WhatsApp direto: ' + url;
-    try {
-      if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text + '
-' + url);
-      else {
-        const ta = document.createElement('textarea');
-        ta.value = text + '
-' + url;
-        ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); ta.remove();
-      }
-    } catch (err) {}
-    window.location.href = url;
-  }
+  const data = shareCard();
+  try {
+    if (navigator.share) {
+      await navigator.share(data);
+      return;
+    }
+  } catch (_) {}
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(data.text + '
+' + data.url);
+    else {
+      const ta = document.createElement('textarea');
+      ta.value = data.text + '
+' + data.url;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+  } catch (_) {}
+  window.location.href = data.url;
 });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
