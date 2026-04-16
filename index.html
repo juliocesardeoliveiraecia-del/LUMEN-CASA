@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-" />
-" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
 <title>LUMEN Casa</title>
 <style>
 :root{--blue:#2f80ff;--orange:#ff8a00;--text:#1f2937;--muted:#6b7280;--line:rgba(47,128,255,.10);--shadow:0 24px 70px rgba(15, 23, 42, .10)}
@@ -50,20 +50,14 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
     <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
       <button id="installBtn" class="install">Adicionar à tela inicial</button>
     </div>
-
-    <div class="top">
-      <img class="logo" src="./logo.png" alt="LUMEN Casa" />
-    </div>
-
+    <div class="top"><img class="logo" src="./logo.png" alt="LUMEN Casa" /></div>
     <div class="grid">
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/5b438c6f79060d6d629efa651e3181f21477ab3e.jpg" alt="Controle de automação pelo celular" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/26029964810c4838e6a9f1102ab36f0c30e70c36.jpg" alt="Fechadura digital inteligente" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/96b8e88f02cb2155ca770eeee0cf8010d4cc9e72.jpg" alt="Sala com automação residencial" />
       <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/9c567e8932bc2ff2f2b45382f80487d069c98511.jpg" alt="Câmera de segurança" />
     </div>
-
     <a class="btn" href="smartlife://">Acessar painel da casa</a>
-
     <div class="section">
       <div class="title">Suporte técnico</div>
       <div class="name">Júlio César de Oliveira</div>
@@ -72,7 +66,6 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
         <button class="share" id="shareBtn" type="button">Compartilhar cartão</button>
       </div>
     </div>
-
     <div class="showcase">
       <div class="showcase-title">Soluções em automação</div>
       <div class="showcase-grid">
@@ -82,11 +75,9 @@ body{min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Se
         <div class="tile"><img class="autoimg" src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/9c567e8932bc2ff2f2b45382f80487d069c98511.jpg" alt="Câmera de segurança" /><span>Câmera de segurança</span></div>
       </div>
     </div>
-
     <div class="foot">Compartilhe sua experiência. Indique Lumen Casa para amigos.</div>
   </div>
 </div>
-
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
@@ -94,21 +85,18 @@ window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferr
 installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
 document.getElementById('shareBtn').addEventListener('click', async () => {
   try {
-    const shareText = 'Júlio César de Oliveira | LUMEN Casa
+    const url = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
+    const msg = 'Júlio César de Oliveira | LUMEN Casa
 Técnico em automação residencial
-WhatsApp: https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
-    const shareData = {
-      title: 'Júlio César de Oliveira — LUMEN Casa',
-      text: shareText,
-      url: 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa'
-    };
-    if (navigator.share) await navigator.share(shareData);
+WhatsApp direto: ' + url;
+    if (navigator.share) await navigator.share({ title: 'Júlio César de Oliveira — LUMEN Casa', text: msg });
     else {
-      await navigator.clipboard.writeText(shareData.text + '
-' + shareData.url);
-      alert('Texto do cartão copiado.');
+      await navigator.clipboard.writeText(msg);
+      window.location.href = url;
     }
-  } catch (e) {}
+  } catch (e) {
+    window.location.href = 'https://wa.me/5564996039433?text=Ol%C3%A1%2C%20vim%20pelo%20cart%C3%A3o%20LUMEN%20Casa';
+  }
 });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
